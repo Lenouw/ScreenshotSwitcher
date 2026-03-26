@@ -6,3 +6,13 @@ node_modules/
 .next/
 dist/
 build/
+
+# Xcode
+xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+DerivedData/
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
