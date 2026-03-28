@@ -51,7 +51,7 @@ class PreferencesWindowController: NSWindowController {
         contentView.addSubview(separator)
 
         // Info compression
-        let infoLabel = NSTextField(labelWithString: "Mode Vibe : compression JPG a 50%")
+        let infoLabel = NSTextField(labelWithString: "Mode Vibe : JPG 100%, max 1700px, 300 DPI")
         infoLabel.font = NSFont.systemFont(ofSize: 11)
         infoLabel.textColor = .secondaryLabelColor
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
