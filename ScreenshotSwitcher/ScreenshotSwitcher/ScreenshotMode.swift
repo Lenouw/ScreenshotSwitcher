@@ -9,7 +9,7 @@ enum ScreenshotMode: String, CaseIterable {
     var label: String {
         switch self {
         case .retina: return "Retina (PNG)"
-        case .vibe: return "Vibe (JPG)"
+        case .vibe: return "Vibe (JPG \u{2264}1700px)"
         }
     }
 
@@ -41,7 +41,7 @@ enum ScreenshotMode: String, CaseIterable {
     var notificationMessage: String {
         switch self {
         case .retina: return "Screenshots en mode Retina (PNG)"
-        case .vibe: return "Screenshots en mode Vibe (JPG 50%)"
+        case .vibe: return "Screenshots en mode Vibe (JPG \u{2264}1700px)"
         }
     }
 
@@ -55,8 +55,8 @@ enum ScreenshotMode: String, CaseIterable {
             // Supprimer la compression si elle existait
             run("/usr/bin/defaults", arguments: ["delete", "com.apple.screencapture", "compression"])
         case .vibe:
-            // Appliquer la compression JPG a 50%
-            run("/usr/bin/defaults", arguments: ["write", "com.apple.screencapture", "compression", "-float", "0.5"])
+            // Qualite JPG maximale (pas de compression)
+            run("/usr/bin/defaults", arguments: ["write", "com.apple.screencapture", "compression", "-float", "1.0"])
         }
 
         // Redemarrer SystemUIServer pour appliquer les changements

@@ -6,6 +6,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     private var statusItem: NSStatusItem!
     private var currentMode: ScreenshotMode = .retina
     private lazy var preferencesWindowController = PreferencesWindowController()
+    private let screenshotWatcher = ScreenshotWatcher()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Lire le mode actuel du systeme (priorite sur UserDefaults)
@@ -15,6 +16,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         // Creer l'item dans la menu bar
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         updateStatusItem()
+
+        // Demarrer le watcher si on est deja en mode Vibe
+        if currentMode == .vibe {
+            screenshotWatcher.start()
+        }
 
         // Configurer les notifications (delegate pour affichage meme si app au premier plan)
         let notifCenter = UNUserNotificationCenter.current()
@@ -83,6 +89,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         // Persister le choix
         UserDefaults.standard.set(currentMode.rawValue, forKey: "screenshotMode")
+
+        // Activer/desactiver le watcher de redimensionnement
+        if currentMode == .vibe {
+            screenshotWatcher.start()
+        } else {
+            screenshotWatcher.stop()
+        }
 
         // Mettre a jour l'interface
         updateStatusItem()
