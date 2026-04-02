@@ -59,8 +59,8 @@ enum ScreenshotMode: String, CaseIterable {
             run("/usr/bin/defaults", arguments: ["write", "com.apple.screencapture", "compression", "-float", "1.0"])
         }
 
-        // Redemarrer SystemUIServer pour appliquer les changements
-        run("/usr/bin/killall", arguments: ["SystemUIServer"])
+        // Note : killall SystemUIServer n'est pas necessaire —
+        // screencapture relit les preferences a chaque capture.
     }
 
     // Detecte le mode actuel en lisant les defaults systeme
